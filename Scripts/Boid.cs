@@ -25,12 +25,12 @@ public class Boid : MonoBehaviour {
     public int numPerceivedFlockmates;
 
     // Cached
-    Material material;
+    //Material material;
     Transform cachedTransform;
     Transform target;
 
     void Awake () {
-        material = transform.GetComponentInChildren<MeshRenderer> ().material;
+        //material = transform.GetComponentInChildren<MeshRenderer> ().material;
         cachedTransform = transform;
     }
 
@@ -45,11 +45,11 @@ public class Boid : MonoBehaviour {
         velocity = transform.forward * startSpeed;
     }
 
-    public void SetColour (Color col) {
-        if (material != null) {
-            material.color = col;
-        }
-    }
+    //public void SetColour (Color col) {
+    //    if (material != null) {
+    //        material.color = col;
+    //    }
+    //}
 
     public void UpdateBoid () {
         Vector3 acceleration = Vector3.zero;
