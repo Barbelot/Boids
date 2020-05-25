@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour {
+public class BoidSpawner : MonoBehaviour {
 
     public enum GizmoType { Never, SelectedOnly, Always }
 
