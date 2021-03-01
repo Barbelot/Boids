@@ -13,8 +13,7 @@ struct Boid {
 
 RWStructuredBuffer<Boid> boids;
 int numBoids;
-float viewRadius;
-float avoidRadius;
+float4 radii;
 
 [numthreads(threadGroupSize,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
@@ -25,13 +24,13 @@ void CSMain (uint3 id : SV_DispatchThreadID)
             float3 offset = boidB.position - boids[id.x].position;
             float sqrDst = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z;
 
-            if (sqrDst < viewRadius * viewRadius) {
+            if (sqrDst < radii.x * radii.x) {
                 boids[id.x].numFlockmates += 1;
                 boids[id.x].flockHeading += boidB.direction;
                 boids[id.x].flockCentre += boidB.position;
 
-                if (sqrDst < avoidRadius * avoidRadius) {
-                    boids[id.x].separationHeading -= offset / sqrDst;
+                if (sqrDst < radii.w * radii.w) {
+                    boids[id.x].separationHeading -= (offset / sqrDst) * (1.0f - smoothstep(radii.z, radii.w, sqrt(sqrDst)));
                 }
             }
         }

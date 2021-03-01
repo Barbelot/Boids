@@ -5,17 +5,32 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BoidSettings : ScriptableObject {
     // Settings
+    [Header("Speed")]
     public float minSpeed = 2;
     public float maxSpeed = 5;
+    public float speedNoiseIntensity = 0;
+    public float speedNoiseFrequency = 0.1f;
+
+    [Header("Direction")]
+    public float directionNoiseIntensity = 0;
+    public float directionNoiseFrequency = 0.1f;
+
+    [Header("Radii")]
     public float perceptionRadius = 2.5f;
-    public float avoidanceRadius = 1;
+    public Vector2 avoidanceRadius = new Vector2(1, 2);
+
+    [Header("Steering")]
     public float maxSteerForce = 3;
 
+    [Header("Weights")]
     public float alignWeight = 1;
     public float cohesionWeight = 1;
     public float seperateWeight = 1;
 
     public float targetWeight = 1;
+
+    [Header("Wind")]
+    public Vector3 wind = Vector3.zero;
 
     [Header ("Collisions")]
     public LayerMask obstacleMask;

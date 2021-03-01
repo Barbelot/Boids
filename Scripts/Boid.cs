@@ -29,9 +29,13 @@ public class Boid : MonoBehaviour {
     Transform cachedTransform;
     Transform target;
 
+    float _random;
+
     void Awake () {
         //material = transform.GetComponentInChildren<MeshRenderer> ().material;
         cachedTransform = transform;
+
+        _random = Random.Range(0.0f, 1.0f);
     }
 
     public void Initialize (BoidSettings settings, Transform target) {
@@ -52,6 +56,12 @@ public class Boid : MonoBehaviour {
     //}
 
     public void UpdateBoid () {
+
+        //Wind
+        transform.Translate(settings.wind * Time.deltaTime, Space.World);
+
+        //Noise
+
         Vector3 acceleration = Vector3.zero;
 
         if (target != null) {
@@ -80,9 +90,16 @@ public class Boid : MonoBehaviour {
         }
 
         velocity += acceleration * Time.deltaTime;
+
+        velocity += new Vector3((Mathf.PerlinNoise(Time.time * settings.speedNoiseFrequency, _random * 10) - 0.5f) * settings.directionNoiseIntensity,
+                                (Mathf.PerlinNoise(Time.time * settings.speedNoiseFrequency, _random * 100) - 0.5f) * settings.directionNoiseIntensity,
+                                (Mathf.PerlinNoise(Time.time * settings.speedNoiseFrequency, _random * 1000) - 0.5f) * settings.directionNoiseIntensity);
+
+
         float speed = velocity.magnitude;
         Vector3 dir = velocity / speed;
         speed = Mathf.Clamp (speed, settings.minSpeed, settings.maxSpeed);
+        speed += (Mathf.PerlinNoise(Time.time * settings.speedNoiseFrequency, _random * 10000) - 0.5f) * settings.speedNoiseIntensity;
         velocity = dir * speed;
 
         cachedTransform.position += velocity * Time.deltaTime;
