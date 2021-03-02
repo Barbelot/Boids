@@ -17,7 +17,7 @@ public class BoidSettings : ScriptableObject {
 
     [Header("Radii")]
     public float perceptionRadius = 2.5f;
-    public Vector2 avoidanceRadius = new Vector2(1, 2);
+    //public Vector2 avoidanceRadius = new Vector2(1, 2);
 
     [Header("Steering")]
     public float maxSteerForce = 3;
@@ -25,7 +25,7 @@ public class BoidSettings : ScriptableObject {
     [Header("Weights")]
     public float alignWeight = 1;
     public float cohesionWeight = 1;
-    public float seperateWeight = 1;
+    public float separateWeight = 1;
 
     public float targetWeight = 1;
 

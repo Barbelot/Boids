@@ -35,7 +35,7 @@ public class BoidManager : MonoBehaviour {
 
             compute.SetBuffer (0, "boids", boidBuffer);
             compute.SetInt ("numBoids", boids.Length);
-            compute.SetVector("radii", new Vector4(settings.perceptionRadius, 0, settings.avoidanceRadius.x, settings.avoidanceRadius.y));
+            compute.SetVector("radii", new Vector4(settings.perceptionRadius, 0, 0, 0));
 
             int threadGroups = Mathf.CeilToInt (numBoids / (float) threadGroupSize);
             compute.Dispatch (0, threadGroups, 1, 1);

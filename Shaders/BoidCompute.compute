@@ -28,10 +28,11 @@ void CSMain (uint3 id : SV_DispatchThreadID)
                 boids[id.x].numFlockmates += 1;
                 boids[id.x].flockHeading += boidB.direction;
                 boids[id.x].flockCentre += boidB.position;
+                boids[id.x].separationHeading -= (offset / sqrDst);
 
-                if (sqrDst < radii.w * radii.w) {
-                    boids[id.x].separationHeading -= (offset / sqrDst) * (1.0f - smoothstep(radii.z, radii.w, sqrt(sqrDst)));
-                }
+                //if (sqrDst < radii.w * radii.w) {
+                //    boids[id.x].separationHeading -= (offset / sqrDst);
+                //}
             }
         }
     }

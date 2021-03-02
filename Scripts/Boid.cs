@@ -32,7 +32,7 @@ public class Boid : MonoBehaviour {
     float _random;
 
     void Awake () {
-        //material = transform.GetComponentInChildren<MeshRenderer> ().material;
+
         cachedTransform = transform;
 
         _random = Random.Range(0.0f, 1.0f);
@@ -49,18 +49,10 @@ public class Boid : MonoBehaviour {
         velocity = transform.forward * startSpeed;
     }
 
-    //public void SetColour (Color col) {
-    //    if (material != null) {
-    //        material.color = col;
-    //    }
-    //}
-
     public void UpdateBoid () {
 
         //Wind
         transform.Translate(settings.wind * Time.deltaTime, Space.World);
-
-        //Noise
 
         Vector3 acceleration = Vector3.zero;
 
@@ -76,11 +68,11 @@ public class Boid : MonoBehaviour {
 
             var alignmentForce = SteerTowards (avgFlockHeading) * settings.alignWeight;
             var cohesionForce = SteerTowards (offsetToFlockmatesCentre) * settings.cohesionWeight;
-            var seperationForce = SteerTowards (avgAvoidanceHeading) * settings.seperateWeight;
+            var separationForce = SteerTowards (avgAvoidanceHeading) * settings.separateWeight;
 
             acceleration += alignmentForce;
             acceleration += cohesionForce;
-            acceleration += seperationForce;
+            acceleration += separationForce;
         }
 
         if (IsHeadingForCollision ()) {
@@ -134,5 +126,4 @@ public class Boid : MonoBehaviour {
         Vector3 v = vector.normalized * settings.maxSpeed - velocity;
         return Vector3.ClampMagnitude (v, settings.maxSteerForce);
     }
-
 }

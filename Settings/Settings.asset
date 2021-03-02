@@ -19,11 +19,10 @@ MonoBehaviour:
   directionNoiseIntensity: 0.1
   directionNoiseFrequency: 0.1
   perceptionRadius: 100
-  avoidanceRadius: {x: 0.5, y: 1.5}
   maxSteerForce: 8
   alignWeight: 2
   cohesionWeight: 1
-  seperateWeight: 3
+  separateWeight: 2.5
   targetWeight: 2
   wind: {x: -2, y: 0, z: 0}
   obstacleMask:
